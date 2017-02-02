@@ -56,7 +56,7 @@ export default class TableScrollbar extends Component {
     };
 
     return (
-      <div className="table-scrollbar-container"
+      <div className="TableScrollbar"
            style={containerStyle}
            onScroll={this.handleScroll}
            ref={(container) => {this.container = container}}>

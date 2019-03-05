@@ -1,4 +1,4 @@
-// Copyright 2017 Olivier Elshocht <olivier.elshocht@gmail.com>
+// Copyright 2017, 2019 Olivier Elshocht <olivier.elshocht@gmail.com>
 // Created 2017-01-11
 
 import React, { Component } from 'react';
@@ -9,6 +9,9 @@ export default class TableScrollbar extends Component {
     this.container = null;
     this.table = null;
     this.tableclone = null;
+    this.headHeight = 0;
+    this.rowHeight = 0;
+
     this.handleResize = this.handleResize.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
   }
@@ -33,7 +36,6 @@ export default class TableScrollbar extends Component {
 
     // Find the enclosed table and clone it, removing the tbody to keep
     // the thead only.
-    // TODO: iso removing the tbody, copy the table and thead only.
     this.table = this.container.getElementsByTagName("table")[0];
     this.tableclone = this.table.cloneNode(true);
     this.tableclone.removeChild(this.tableclone.getElementsByTagName("tbody")[0]);
@@ -46,11 +48,38 @@ export default class TableScrollbar extends Component {
     this.tableclone.setAttribute("class", this.table.getAttribute("class") + " table-fixed-head");
     this.tableclone.style.position = "absolute";
     this.container.appendChild(this.tableclone);
+
+    // Get the table head height.
+    if (this.headHeight === 0) {
+      const thead = this.table.getElementsByTagName("thead")[0];
+      if (thead) {
+        this.headHeight = thead.clientHeight;
+        console.log("Table head height:", this.headHeight);
+      }
+    }
+
+    // Get the table row height - from a temp row, as the table body
+    // may not contain any row yet.
+    if (this.rowHeight === 0) {
+      const tbody = document.createElement("tbody");
+      const tr = document.createElement("tr");
+      const td = document.createElement("td");
+      const content = document.createTextNode("&nbsp;");
+      td.appendChild(content);
+      tr.appendChild(td);
+      tbody.appendChild(tr);
+      this.tableclone.appendChild(tbody);
+      this.rowHeight = tr.clientHeight;
+      this.tableclone.removeChild(tbody);
+      console.log("Table row height:", this.rowHeight);
+    }
   }
 
   render() {
     const containerStyle = {
-      height: this.props.height,
+      height: (this.props.rows) ?
+        this.headHeight + (this.props.rows * this.rowHeight) + "px" :
+        this.props.height,
       overflow: "auto",
       position: "relative",
     };
@@ -81,6 +110,11 @@ export default class TableScrollbar extends Component {
   }
 }
 
-TableScrollbar.propType = {
+TableScrollbar.propTypes = {
   height: React.PropTypes.string.isRequired,
-}
+  rows: React.PropTypes.number,
+};
+
+TableScrollbar.defaultProps = {
+  height: "auto",
+};

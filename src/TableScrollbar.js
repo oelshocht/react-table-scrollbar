@@ -43,6 +43,22 @@ export default class TableScrollbar extends React.Component {
     this.renderFixedHeader();
   }
 
+  handleScroll() {
+    this.tableclone.style.top = this.container.scrollTop + "px";
+  }
+
+  handleResize() {
+    // Copy the columns width from the table to the clone.
+    let columns = this.table.getElementsByTagName("th");
+    let cloneColumns = this.tableclone.getElementsByTagName("th");
+    for (let i = 0; i < columns.length; i++) {
+      let width = columns[i].clientWidth + "px";
+      cloneColumns[i].style.minWidth = width;
+      cloneColumns[i].style.width = width;
+      cloneColumns[i].style.boxSizing = "border-box";
+    }
+  }
+
   renderFixedHeader() {
     // Remove previous table clone from the DOM.
     if (this.tableclone !== null) {
@@ -111,22 +127,6 @@ export default class TableScrollbar extends React.Component {
         {this.props.children}
       </div>
     );
-  }
-
-  handleScroll() {
-    this.tableclone.style.top = this.container.scrollTop + "px";
-  }
-
-  handleResize() {
-    // Copy the columns width from the table to the clone.
-    let columns = this.table.getElementsByTagName("th");
-    let cloneColumns = this.tableclone.getElementsByTagName("th");
-    for (let i = 0; i < columns.length; i++) {
-      let width = columns[i].clientWidth + "px";
-      cloneColumns[i].style.minWidth = width;
-      cloneColumns[i].style.width = width;
-      cloneColumns[i].style.boxSizing = "border-box";
-    }
   }
 }
 

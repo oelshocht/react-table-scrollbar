@@ -26,10 +26,13 @@ export default class TableScrollbar extends React.Component {
 
     this.handleResize = this.handleResize.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
+    this.renderFixedHeader = this.renderFixedHeader.bind(this);
   }
 
   componentDidMount() {
+    this.renderFixedHeader();
     addEventListener("resize", this.handleResize);
+    this.forceUpdate();
   }
 
   componentWillUnmount() {
@@ -37,6 +40,10 @@ export default class TableScrollbar extends React.Component {
   }
 
   componentDidUpdate() {
+    this.renderFixedHeader();
+  }
+
+  renderFixedHeader() {
     // Remove previous table clone from the DOM.
     if (this.tableclone !== null) {
       if (this.tableclone.parentNode !== null) {
@@ -118,6 +125,7 @@ export default class TableScrollbar extends React.Component {
       let width = columns[i].clientWidth + "px";
       cloneColumns[i].style.minWidth = width;
       cloneColumns[i].style.width = width;
+      cloneColumns[i].style.boxSizing = "border-box";
     }
   }
 }

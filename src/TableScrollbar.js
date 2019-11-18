@@ -11,7 +11,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  height: "auto",
+  height: "100%",
 };
 
 

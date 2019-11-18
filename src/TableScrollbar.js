@@ -1,9 +1,21 @@
 // Copyright 2017, 2019 Olivier Elshocht <olivier.elshocht@gmail.com>
 // Created 2017-01-11
 
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-export default class TableScrollbar extends Component {
+
+const propTypes = {
+  height: PropTypes.string.isRequired,
+  rows: PropTypes.number,
+};
+
+const defaultProps = {
+  height: "auto",
+};
+
+
+export default class TableScrollbar extends React.Component {
   constructor(props) {
     super(props);
     this.container = null;
@@ -110,11 +122,5 @@ export default class TableScrollbar extends Component {
   }
 }
 
-TableScrollbar.propTypes = {
-  height: React.PropTypes.string.isRequired,
-  rows: React.PropTypes.number,
-};
-
-TableScrollbar.defaultProps = {
-  height: "auto",
-};
+TableScrollbar.propTypes = propTypes;
+TableScrollbar.defaultProps = defaultProps;

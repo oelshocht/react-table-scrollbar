@@ -1,0 +1,24 @@
+.App {
+  display: flex;
+  font-size: 0.75em;
+}
+
+.box {
+  padding: 10px;
+}
+
+.box.sized {
+  height: 30vh;
+}
+
+table {
+  background-color: white;
+}
+
+thead {
+  background-color: grey;
+}
+
+tr:nth-child(even) {
+  background-color: lightgrey;
+}

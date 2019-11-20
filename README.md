@@ -3,7 +3,9 @@ React fixed table header position and auto scrollbar.
 
 ![demo](./demo.gif)
 
+
 # Getting Started
+[![react-table-scrollbar](https://nodei.co/npm/react-table-scrollbar.png)](https://npmjs.org/package/react-table-scrollbar)
 * Install the package dependency:
     ```shell
       $ npm install --save react-table-scrollbar

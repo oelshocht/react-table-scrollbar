@@ -16,7 +16,9 @@
     "url": "git+https://github.com/oelshocht/react-table-scrollbar.git"
   },
   "peerDependencies": {
-    "react": "^16.12.0"
+    "prop-types": "^15.7.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
   },
   "devDependencies": {
     "@babel/core": "^7.7.2",
@@ -25,6 +27,7 @@
     "babel-loader": "^8.0.6",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
+    "react-dom": "^16.12.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
   },

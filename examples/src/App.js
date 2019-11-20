@@ -47,7 +47,7 @@ function App() {
           {table}
         </TableScrollbar>
       </div>
-      <div className="box sized">
+      <div className="box" style={{height: "30vh"}}>
         <span>
           By default, the table will fill up the container's height
         </span>

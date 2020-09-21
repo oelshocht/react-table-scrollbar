@@ -1,4 +1,4 @@
-// Copyright 2017, 2019 Olivier Elshocht <olivier.elshocht@gmail.com>
+// Copyright 2017, 2019, 2020 Olivier Elshocht <olivier.elshocht@gmail.com>
 // Created 2017-01-11
 
 import React from 'react';
@@ -18,6 +18,7 @@ const defaultProps = {
 export default class TableScrollbar extends React.Component {
   constructor(props) {
     super(props);
+    this.observer = null;
     this.container = null;
     this.table = null;
     this.tableclone = null;
@@ -30,13 +31,15 @@ export default class TableScrollbar extends React.Component {
   }
 
   componentDidMount() {
+    this.observer = new MutationObserver(this.handleResize);
     this.renderFixedHeader();
-    addEventListener("resize", this.handleResize);
+    window.addEventListener("resize", this.handleResize);
     this.forceUpdate();
   }
 
   componentWillUnmount() {
-    removeEventListener("resize", this.handleResize);
+    this.observer.disconnect();
+    window.removeEventListener("resize", this.handleResize);
   }
 
   componentDidUpdate() {
@@ -67,6 +70,7 @@ export default class TableScrollbar extends React.Component {
       }
       this.tableclone = null;
       this.table = null;
+      this.observer.disconnect();
     }
 
     // Find the enclosed table and clone it, removing the tbody to keep
@@ -78,6 +82,10 @@ export default class TableScrollbar extends React.Component {
     // Set the clone size (column widths) and position (scroll top)
     this.handleResize()
     this.handleScroll();
+
+    // Observe any further DOM changes
+    const config = {subtree: true, childList: true, attributes: true, characterData: true};
+    this.observer.observe(this.table, config);
 
     // Add the clone to the container.
     this.tableclone.setAttribute("class", this.table.getAttribute("class") + " table-fixed-head");

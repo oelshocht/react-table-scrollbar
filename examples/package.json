@@ -2,9 +2,9 @@
   "name": "react-table-scrollbar-examples",
   "version": "0.1.0",
   "dependencies": {
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-scripts": "^3.3.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "3.4.3",
     "react-table-scrollbar": "^0.1.5"
   },
   "scripts": {

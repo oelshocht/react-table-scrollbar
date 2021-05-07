@@ -1,6 +1,6 @@
 {
   "name": "react-table-scrollbar",
-  "version": "0.1.9",
+  "version": "0.1.11",
   "description": "React fixed table header position and auto scrollbar",
   "author": "Olivier Elshocht",
   "license": "MIT",

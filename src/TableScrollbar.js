@@ -1,4 +1,4 @@
-// Copyright 2017, 2019, 2020 Olivier Elshocht <olivier.elshocht@gmail.com>
+// Copyright 2017, 2019, 2020, 2021 Olivier Elshocht <olivier.elshocht@gmail.com>
 // Created 2017-01-11
 
 import React from 'react';
@@ -97,7 +97,7 @@ export default class TableScrollbar extends React.Component {
       const thead = this.table.getElementsByTagName("thead")[0];
       if (thead) {
         this.headHeight = thead.clientHeight;
-        console.log("Table head height:", this.headHeight);
+        //console.log("Table head height:", this.headHeight);
       }
     }
 
@@ -112,9 +112,9 @@ export default class TableScrollbar extends React.Component {
       tr.appendChild(td);
       tbody.appendChild(tr);
       this.tableclone.appendChild(tbody);
-      this.rowHeight = tbody.clientHeight;  // Use tbody iso of tr to account for boder-spacing.
+      this.rowHeight = tbody.clientHeight;  // Use tbody iso of tr to account for border-spacing.
       this.tableclone.removeChild(tbody);
-      console.log("Table row height:", this.rowHeight);
+      //console.log("Table row height:", this.rowHeight);
     }
   }
 

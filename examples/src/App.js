@@ -35,7 +35,7 @@ function App() {
         <span>
           Set the table height as a number of body rows
         </span>
-        <TableScrollbar rows="5">
+        <TableScrollbar rows={5}>
           {table}
         </TableScrollbar>
       </div>
